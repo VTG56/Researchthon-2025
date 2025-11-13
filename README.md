@@ -1,57 +1,54 @@
-# Researchthon 2025
+# Researchthon 2025 Official Platform
 
-A modern web application built using Vite, React, and Tailwind CSS for the Researchthon 2025 event portal. This project is organized for extendibility and developer ease, enabling fast frontend enhancements and Firebase hosting integration.
+Researchthon 2025 is the official announcement and management platform for the Researchthon 2025 event at RVCE. This web portal provides live updates, secure admin access, and a smooth experience for both organizers and participants.
+
+---
+
+## Project Architecture
+
+```mermaid
+graph TD
+    A[Landing Page] --> B[Announcements Page]
+    A --> C[Admin Login]
+    C --> D[Admin Dashboard]
+    B --> E[User Dashboard]
+    D --> F[Manage Announcements]
+    F --> G[Update Live Announcements]
+    E --> B
+```
+```
 
 ## Features
-- Lightning-fast Vite + React setup
-- Tailwind CSS for rapid styling
-- Firebase-compatible for hosting and announcements
-- Modular structure for scalable development
+- Official platform for live Researchthon 2025 updates
+- Distinct dashboards for Admin and Participants
+- Admins can securely login and update announcements in real-time
+- Announcement management (add, edit, delete with previews)
+- Responsive and fast: Vite + React with Tailwind CSS
+- Firebase hosting and announcements integration
+- Modular folder structure for scalable development
 
 ## Folder Structure
 ```
 Researchthon-2025/
-│
 ├── src/
-│   ├── pages/                        # Full-screen pages/components
-│   │   ├── LandingPage.jsx
-│   │   ├── AnnouncementsPage.jsx
-│   │   ├── AdminLogin.jsx
-│   │   ├── AdminDashboard.jsx
-│   │   └── NotFound.jsx
-│   ├── components/                   # Reusable UI components
-│   │   ├── AnnouncementCard.jsx
-│   │   ├── AnnouncementList.jsx
-│   │   ├── AdminAnnouncementForm.jsx
-│   │   ├── FileUploadButton.jsx
-│   │   ├── Loader.jsx
-│   │   └── ProtectedRoute.jsx
-│   ├── layout/                       # Shared structure (Navigation/Footer)
-│   │   ├── Navbar.jsx
-│   │   └── Footer.jsx
-│   ├── firebase/                     # Firebase logic and config
-│   │   ├── client.js                 # Firebase initialization
-│   │   ├── refs.js                   # Firestore refs/storage paths
-│   │   ├── upload.js                 # Storage upload helpers
-│   │   └── queries.js                # Announcement actions
-│   ├── utils/                        # General-purpose helpers
-│   │   ├── formatTimestamp.js
-│   │   ├── randomId.js
-│   │   ├── sanitizeFileName.js
-│   │   └── localAuth.js              # Local login logic
-│   ├── App.jsx                       # App routes and global layout
-│   ├── main.jsx                      # React root mount
-│   └── index.css                     # Tailwind CSS config
-├── public/                           # Static assets
-│   ├── logo.png
-│   └── favicon.ico
+│   ├── pages/            # Fullscreen pages for routing
+│   ├── components/       # Reusable components
+│   ├── layout/           # Navbar and Footer layout logic
+│   ├── firebase/         # Firebase config, queries and helpers
+│   ├── utils/            # Utility JS helpers (formatting, auth, etc)
+│   ├── App.jsx           # Global app router
+│   └── main.jsx, index.css
+├── public/               # Static assets (logo, favicon)
+├── firebase.json, .firebaserc
+├── package.json, vite.config.js, tailwind.config.js
+```
 
-## Getting Started
+## Usage
 1. Install dependencies:
    ```bash
    npm install
    ```
-2. Start development server:
+2. Start the development server:
    ```bash
    npm run dev
    ```
@@ -59,22 +56,31 @@ Researchthon-2025/
    ```bash
    npm run build
    ```
-
-## Deployment
-- Hosted using Firebase. Production build output is automatically served from `dist`.
-- To deploy, build and use Firebase CLI:
+4. Deploy using Firebase CLI:
    ```bash
-   npm run build
    firebase deploy
    ```
 
-## Development Notes
-- All sensitive configuration (Firebase keys, user credentials) must be kept secure and never committed to the repository.
-- Folder structure can be easily extended.
-- All enhancement features (backgrounds, animations) should be added into respective page/component/layout files for maintainability.
+## Dashboards
 
-## Contributing
-Pull requests and suggestions are welcome. Please open issues for feature requests or bug reports related to the Researchthon 2025 portal interface.
+### Admin Dashboard
+- Secure login for organizers
+- Add, edit, or delete announcements
+- Manage files and monitor activity
+- Updates push instantly for all users
+
+### User Dashboard
+- Browse official announcements
+- Live updates—see new information in real-time
+- Access event resources and help
+
+---
+
+## Development & Contribution
+- Extend pages/components as needed
+- All announcement update logic lives in `src/firebase/queries.js`
+- Style and animation code can be added to the appropriate layout/component/page file
+- PRs and issues welcome for contributions & bug reports
 
 ## License
 MIT
