@@ -17,7 +17,7 @@ graph TD
     E --> B
 ```
 ```
-
+```
 ## Features
 - Official platform for live Researchthon 2025 updates
 - Distinct dashboards for Admin and Participants
