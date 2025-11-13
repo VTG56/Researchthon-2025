@@ -1,16 +1,13 @@
-import AnnouncementCard from './AnnouncementCard';
+// src/components/AnnouncementList.jsx
+import AnnouncementCard from "./AnnouncementCard";
 
 const AnnouncementList = ({ announcements }) => {
   if (!announcements || announcements.length === 0) {
-    return (
-      <div className="text-center text-gray-500 py-8">
-        No announcements yet
-      </div>
-    );
+    return <div className="text-center text-gray-400 py-8">No announcements yet</div>;
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {announcements.map((announcement) => (
         <AnnouncementCard key={announcement.id} announcement={announcement} />
       ))}

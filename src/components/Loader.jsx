@@ -1,8 +1,8 @@
+// src/components/Loader.jsx
 export default function Loader() {
   return (
-    <div className="flex flex-col items-center justify-center py-12">
-      <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-      <p className="mt-4 text-gray-600 font-medium">Loading...</p>
+    <div className="flex items-center justify-center p-6">
+      <div className="w-10 h-10 border-4 border-white/20 border-t-white rounded-full animate-spin" />
     </div>
   );
 }
