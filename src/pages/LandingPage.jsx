@@ -62,7 +62,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="bg-[#0b0f13]">
+    <div className="relative">
       {/* Hero Section - Full Screen */}
       <motion.section 
         id="hero"
