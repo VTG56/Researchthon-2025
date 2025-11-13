@@ -24,7 +24,7 @@ export default function App() {
           particleCount={120}
           particleColors={['#ffffff', '#60a5fa', '#3b82f6']}
           speed={0.3}
-          particleSize={2.5}
+          particleSize={1.4}
           mouseInteraction={true}
           parallaxStrength={0.3}
           connectionDistance={200}

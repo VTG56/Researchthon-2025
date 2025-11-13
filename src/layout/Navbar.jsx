@@ -43,26 +43,36 @@ export default function Navbar() {
           </Link>
         </div>
 
-        <div className="hidden md:flex gap-6 items-center">
-          <Link to="/" className="text-lg text-gray-200 hover:text-white transition">
-            Home
-          </Link>
-          <Link to="/announcements" className="text-lg text-gray-200 hover:text-white transition">
-            Announcements
-          </Link>
-          <button 
-            onClick={() => scrollToSection('about')}
-            className="text-lg text-gray-200 hover:text-white transition"
-          >
-            About
-          </button>
-          <button 
-            onClick={() => scrollToSection('features')}
-            className="text-lg text-gray-200 hover:text-white transition"
-          >
-            Features
-          </button>
-        </div>
+        <div className="hidden md:flex items-center gap-4">
+  <Link
+    to="/"
+    className="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-gray-200 hover:text-white transition-all btn-glow font-genos tracking-wide"
+  >
+    Home
+  </Link>
+
+  <Link
+    to="/announcements"
+    className="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-gray-200 hover:text-white transition-all btn-glow font-genos tracking-wide"
+  >
+    Announcements
+  </Link>
+
+  <button
+    onClick={() => scrollToSection('about')}
+    className="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-gray-200 hover:text-white transition-all btn-glow font-genos tracking-wide"
+  >
+    About
+  </button>
+
+  <button
+    onClick={() => scrollToSection('features')}
+    className="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-gray-200 hover:text-white transition-all btn-glow font-genos tracking-wide"
+  >
+    Features
+  </button>
+</div>
+
 
         <div className="flex items-center gap-3">
           <img src="/cc-logo.png" alt="Club Logo" className="h-12 md:h-16 w-auto object-contain" loading="lazy" />
