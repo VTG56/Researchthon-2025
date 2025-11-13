@@ -1,3 +1,4 @@
+/* src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,9 +9,77 @@
   --card-bg: #1f2933;
 }
 
+* {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   padding: 0;
-  background: #000;
+  background: #0b0f13;
   color: var(--fg);
+  overflow-x: hidden;
+}
+
+/* Optional fancy animated background - Enable by adding class="fancy-bg" to body tag */
+.fancy-bg {
+  position: relative;
+}
+
+.fancy-bg::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 50%);
+  animation: pulseRotate 20s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes pulseRotate {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.5;
+  }
+  25% {
+    transform: translate(10%, 10%) scale(1.1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(-5%, 15%) scale(0.95);
+    opacity: 0.6;
+  }
+  75% {
+    transform: translate(-10%, -5%) scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto;
+  }
+  
+  .fancy-bg::before {
+    animation: none;
+  }
+}
+
+/* Smooth page transitions */
+.page-fade {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

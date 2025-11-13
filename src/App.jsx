@@ -16,10 +16,10 @@ import NotFound from "./pages/NotFound";
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen flex flex-col bg-black text-white">
+      <div className="min-h-screen flex flex-col bg-[#0b0f13] text-white">
         <Navbar />
 
-        <main className="flex-grow relative z-10">
+        <main className="flex-grow relative z-10 pt-20">
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/announcements" element={<AnnouncementsPage />} />

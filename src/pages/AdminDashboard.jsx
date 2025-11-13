@@ -13,14 +13,13 @@ import { ref as storageRef, deleteObject } from "firebase/storage";
 import { announcementCollection } from "../firebase/refs";
 import AdminAnnouncementForm from "../components/AdminAnnouncementForm";
 import AnnouncementCard from "../components/AnnouncementCard";
-import { db, storage } from "../firebase/client"; // ensure client.js exports these
+import { db, storage } from "../firebase/client";
 import { FiTrash2, FiEdit3 } from "react-icons/fi";
 
 const AdminDashboard = () => {
   const [announcements, setAnnouncements] = useState([]);
   const [deletingId, setDeletingId] = useState(null);
 
-  // Edit modal state
   const [editing, setEditing] = useState(false);
   const [editId, setEditId] = useState(null);
   const [editTitle, setEditTitle] = useState("");
@@ -42,7 +41,6 @@ const AdminDashboard = () => {
     return () => unsubscribe();
   }, []);
 
-  // Helper: try to delete a single attachment from Storage
   const tryDeleteAttachment = async (file) => {
     try {
       if (file.fullPath) {
@@ -88,7 +86,6 @@ const AdminDashboard = () => {
     try {
       if (Array.isArray(announcement.attachments) && announcement.attachments.length > 0) {
         for (const file of announcement.attachments) {
-          // eslint-disable-next-line no-await-in-loop
           await tryDeleteAttachment(file);
         }
       }
@@ -105,7 +102,6 @@ const AdminDashboard = () => {
     }
   };
 
-  // Open edit modal with prefilled values (attachments not changed here)
   const openEdit = (announcement) => {
     setEditId(announcement.id);
     setEditTitle(announcement.title || "");
@@ -144,114 +140,114 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0f13] py-8">
-      <div className="max-w-5xl mx-auto px-4">
-        <h1 className="text-5xl font-bold mb-8 text-white">Admin Dashboard</h1>
+    <div className="min-h-screen bg-[#0b0f13] py-6 md:py-8 page-fade">
+      <div className="max-w-6xl mx-auto px-4">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 text-white">Admin Dashboard</h1>
 
-        <div className="mb-8">
+        <div className="mb-8 md:mb-12">
           <AdminAnnouncementForm />
         </div>
 
         <div>
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-4xl font-bold text-white">All Announcements</h2>
-            <p className="text-sm text-gray-400">Live (real-time)</p>
+          <div className="flex items-center justify-between mb-4 md:mb-6">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">All Announcements</h2>
+            <span className="text-xs md:text-sm text-gray-400 bg-green-500/10 px-2 md:px-3 py-1 rounded-full border border-green-500/20">
+              ● Live
+            </span>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-4 md:space-y-6">
             {announcements.map((announcement) => (
-              <div key={announcement.id} className="flex gap-4 items-start">
-                <div className="flex-1">
+              <div key={announcement.id} className="flex flex-col md:flex-row gap-3 md:gap-4 items-start">
+                <div className="flex-1 w-full">
                   <AnnouncementCard announcement={announcement} />
                 </div>
 
-                {/* Action buttons */}
-                <div className="w-36 flex-shrink-0 flex flex-col gap-2 items-end pt-2">
+                <div className="w-full md:w-auto flex md:flex-col gap-2 md:gap-3 md:pt-2">
                   <button
                     onClick={() => openEdit(announcement)}
-                    className="flex items-center gap-2 px-5 py-2 rounded-md text-sm bg-blue-600 hover:bg-blue-700 text-white transition"
+                    className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 md:px-5 py-2 md:py-2.5 rounded-lg text-sm md:text-base bg-blue-600 hover:bg-blue-700 text-white transition font-medium"
                   >
-                    <FiEdit3 />
+                    <FiEdit3 className="w-4 h-4" />
                     <span>Edit</span>
                   </button>
 
                   <button
                     onClick={() => handleDelete(announcement)}
                     disabled={deletingId === announcement.id}
-                    className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm transition ${
+                    className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-4 md:px-5 py-2 md:py-2.5 rounded-lg text-sm md:text-base transition font-medium ${
                       deletingId === announcement.id
-                        ? "bg-red-700 text-white/60 cursor-not-allowed"
+                        ? "bg-red-800 text-white/60 cursor-not-allowed"
                         : "bg-red-600 hover:bg-red-700 text-white"
                     }`}
                   >
-                    <FiTrash2 />
+                    <FiTrash2 className="w-4 h-4" />
                     <span>{deletingId === announcement.id ? "Deleting..." : "Delete"}</span>
                   </button>
                 </div>
               </div>
             ))}
             {announcements.length === 0 && (
-              <div className="text-gray-400">No announcements yet.</div>
+              <div className="text-center text-gray-400 py-12">No announcements yet.</div>
             )}
           </div>
         </div>
       </div>
 
-      {/* Edit Modal */}
       {editing && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div
-            className="absolute inset-0 bg-black/60"
+            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
             onClick={() => {
               if (!savingEdit) closeEdit();
             }}
           />
-          <div className="relative bg-[#0b0f13] border border-white/6 rounded-lg max-w-2xl w-full mx-4 p-6 z-60">
-            <h3 className="text-2xl font-bold text-white mb-4">Edit Announcement</h3>
+          <div className="relative bg-[#1f2933] border border-white/10 rounded-xl max-w-2xl w-full mx-4 p-5 md:p-6 z-60 max-h-[90vh] overflow-y-auto">
+            <h3 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6">Edit Announcement</h3>
 
-            <label className="block mb-2 text-lg text-gray-300">Title</label>
+            <label className="block mb-2 text-base md:text-lg text-gray-300 font-medium">Title</label>
             <input
               value={editTitle}
               onChange={(e) => setEditTitle(e.target.value)}
-              className="w-full mb-3 px-3 py-2 rounded bg-[#14171a] border border-white/6 text-white"
+              className="w-full mb-4 px-3 md:px-4 py-2 md:py-2.5 rounded-lg bg-[#0b0f13] border border-white/10 text-white text-base md:text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
 
-            <label className="block mb-2 text-lg text-gray-300">Description</label>
+            <label className="block mb-2 text-base md:text-lg text-gray-300 font-medium">Description</label>
             <textarea
               value={editBody}
               onChange={(e) => setEditBody(e.target.value)}
               rows={6}
-              className="w-full mb-3 px-3 py-2 rounded bg-[#14171a] border border-white/6 text-white"
+              className="w-full mb-4 px-3 md:px-4 py-2 md:py-2.5 rounded-lg bg-[#0b0f13] border border-white/10 text-white text-base md:text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
             />
 
-            <label className="inline-flex items-center gap-2 text-sm mb-4">
+            <label className="inline-flex items-center gap-2 text-sm md:text-base mb-6 cursor-pointer">
               <input
                 type="checkbox"
                 checked={editPinned}
                 onChange={(e) => setEditPinned(e.target.checked)}
-                className="form-checkbox h-4 w-4 text-blue-600"
+                className="form-checkbox h-4 w-4 md:h-5 md:w-5 text-blue-600 rounded"
               />
-              <span className="text-gray-300">Pinned</span>
+              <span className="text-gray-300">Pin this announcement</span>
             </label>
 
-            <div className="flex items-center justify-end gap-3 mt-4">
+            <div className="flex items-center justify-end gap-3 mt-6">
               <button
                 onClick={() => {
                   if (!savingEdit) closeEdit();
                 }}
-                className="px-4 py-2 rounded-md bg-white/6 hover:bg-white/10 text-white transition"
+                className="px-4 md:px-5 py-2 md:py-2.5 rounded-lg bg-white/10 hover:bg-white/15 text-white transition font-medium"
                 disabled={savingEdit}
               >
                 Cancel
               </button>
               <button
                 onClick={handleSaveEdit}
-                className={`px-4 py-2 rounded-md text-white ${
+                className={`px-4 md:px-5 py-2 md:py-2.5 rounded-lg text-white font-medium ${
                   savingEdit ? "bg-gray-600 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
                 }`}
                 disabled={savingEdit}
               >
-                {savingEdit ? "Saving..." : "Save"}
+                {savingEdit ? "Saving..." : "Save Changes"}
               </button>
             </div>
           </div>

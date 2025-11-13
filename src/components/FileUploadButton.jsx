@@ -1,3 +1,4 @@
+// src/components/FileUploadButton.jsx
 import { useRef } from 'react';
 
 const FileUploadButton = ({ onFilesSelected }) => {
@@ -28,9 +29,9 @@ const FileUploadButton = ({ onFilesSelected }) => {
       <button
         type="button"
         onClick={handleButtonClick}
-        className="px-4 py-2 w-full  text-2xl bg-blue-800 text-white rounded-md hover:bg-blue-700 transition"
+        className="px-4 py-2.5 w-full text-base md:text-lg bg-white/10 hover:bg-white/15 border border-white/20 text-white rounded-lg transition font-medium"
       >
-        +Attach Files
+        📎 Attach Files
       </button>
     </div>
   );
