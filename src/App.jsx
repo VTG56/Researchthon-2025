@@ -1,3 +1,4 @@
+// src/App.jsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./layout/Navbar";
@@ -15,19 +16,14 @@ import NotFound from "./pages/NotFound";
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="flex flex-col min-h-screen">
-
-        {/* Navbar always visible */}
+      <div className="min-h-screen flex flex-col bg-black text-white">
         <Navbar />
 
-        {/* Main content */}
-        <main className="flex-grow">
+        <main className="flex-grow relative z-10">
           <Routes>
-            {/* PUBLIC ROUTES */}
             <Route path="/" element={<LandingPage />} />
             <Route path="/announcements" element={<AnnouncementsPage />} />
 
-            {/* ADMIN ROUTES */}
             <Route path="/admin/login" element={<AdminLogin />} />
 
             <Route
@@ -39,12 +35,10 @@ export default function App() {
               }
             />
 
-            {/* 404 */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
 
-        {/* Footer always visible */}
         <Footer />
       </div>
     </BrowserRouter>
