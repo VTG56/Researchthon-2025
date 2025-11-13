@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "researchthon-2025"
-  }
+    "default": "rvce-researchthon-2025"
+  },
+  "targets": {},
+  "etags": {}
 }
