@@ -42,6 +42,7 @@ Researchthon-2025/
 ├── firebase.json, .firebaserc
 ├── package.json, vite.config.js, tailwind.config.js
 ```
+```
 
 ## Usage
 1. Install dependencies:
