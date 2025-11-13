@@ -43,7 +43,7 @@ Researchthon-2025/
 ├── package.json, vite.config.js, tailwind.config.js
 ```
 ```
-
+```
 ## Usage
 1. Install dependencies:
    ```bash
