@@ -28,9 +28,9 @@ const FileUploadButton = ({ onFilesSelected }) => {
       <button
         type="button"
         onClick={handleButtonClick}
-        className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+        className="px-4 py-2 w-full  text-2xl bg-blue-800 text-white rounded-md hover:bg-blue-700 transition"
       >
-        Attach Files
+        +Attach Files
       </button>
     </div>
   );

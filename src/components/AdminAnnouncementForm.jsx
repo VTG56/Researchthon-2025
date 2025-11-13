@@ -42,34 +42,34 @@ const AdminAnnouncementForm = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-xl font-bold mb-4">Create Announcement</h2>
+    <div className="bg-[var(--card-bg)] p-6 rounded-lg shadow-md">
+      <h2 className="text-4xl font-bold mb-4">Create Announcement</h2>
       
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label className="block text-sm font-medium mb-2">Title</label>
+          <label className="block text-2xl font-medium mb-2">Title</label>
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border text-black text-2xl border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-medium mb-2">Body</label>
+          <label className="block text-2xl font-medium mb-2">Description</label>
           <textarea
             value={body}
             onChange={(e) => setBody(e.target.value)}
             rows="6"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border text-black text-2xl border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
 
-        <div className="mb-4">
-          <label className="block text-sm font-medium mb-2">Attachments</label>
+        <div className="mb-4 ">
+          <label className="block text-2xl font-medium mb-2">Attachments</label>
           <FileUploadButton onFilesSelected={handleFilesSelected} />
           
           {selectedFiles.length > 0 && (
@@ -84,9 +84,9 @@ const AdminAnnouncementForm = () => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition disabled:bg-gray-400"
+          className="w-full bg-blue-500 text-black text-4xl py-2 rounded-md hover:bg-blue-700 transition disabled:bg-gray-400"
         >
-          {isSubmitting ? 'Posting...' : 'Post Announcement'}
+          {isSubmitting ? 'Posting...' : 'Post Announcement✔️'}
         </button>
       </form>
     </div>
