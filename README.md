@@ -1,6 +1,6 @@
-# Researchthon 2025 Official Platform
+# ReSearchathon 2025 Official Platform
 
-Researchthon 2025 is the official announcement and management platform for the Researchthon 2025 event at RVCE. This web portal provides live updates, secure admin access, and a smooth experience for both organizers and participants.
+Researchathon 2025 is the official announcement and management platform for the Researchathon 2025 event at RVCE. This web portal provides live updates, secure admin access, and a smooth experience for both organizers and participants.
 
 ---
 

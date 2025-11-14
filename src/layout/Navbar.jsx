@@ -34,88 +34,163 @@ export default function Navbar() {
     }
   };
 
+  const isActive = (path) => {
+    if (path === '/games') {
+      return location.pathname === '/games' || location.pathname.startsWith('/games/');
+    }
+    if (path === '/') {
+      return location.pathname === '/' && !location.hash;
+    }
+    return location.pathname === path;
+  };
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/60 border-b border-white/6">
-      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <Link to="/" className="flex items-center gap-3" onClick={closeMenu}>
-            <img src="/rvce-logo.png" alt="RVCE Logo" className="h-10 md:h-12 w-auto object-contain" loading="lazy" />
+      <div className="max-w-7xl mx-auto px-4 py-3">
+        {/* Desktop Layout */}
+        <div className="hidden md:flex md:items-center md:justify-between">
+          {/* Left Logo */}
+          <Link to="/" className="flex items-center" onClick={closeMenu}>
+            <img src="/rvce-logo.png" alt="RVCE Logo" className="h-12 w-auto object-contain" loading="lazy" />
           </Link>
+
+          {/* Center Section: Home + About + GAMES + Features + Announcements */}
+          <div className="flex items-center gap-12">
+            <div className="flex items-center gap-6">
+              <Link
+                to="/"
+                className={`px-4 py-2 rounded-lg transition-all btn-glow font-genos tracking-wide ${'bg-white/5 hover:bg-white/10 text-gray-200 hover:text-white'
+                }`}
+                onClick={() => {
+                  closeMenu();
+                  if (location.pathname === '/') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }
+                }}
+                aria-current={isActive('/') ? 'page' : undefined}
+              >
+                HomePage
+              </Link>
+
+              <button
+                onClick={() => scrollToSection('about')}
+                className="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-gray-200 hover:text-white transition-all btn-glow font-genos tracking-wide"
+              >
+                Overview
+              </button>
+            </div>
+
+            <Link
+              to="/games"
+              className={`px-4 py-2 rounded-lg transition-all btn-glow font-genos tracking-wide ${
+                isActive('/games')
+                  ? 'bg-white/15 text-white'
+                  : 'bg-white/5 hover:bg-white/10 text-gray-200 hover:text-white'
+              }`}
+              onClick={closeMenu}
+              aria-label="Navigate to Games"
+              aria-current={isActive('/games') ? 'page' : undefined}
+            >
+              Games
+            </Link>
+
+            <div className="flex items-center gap-6">
+              <button
+                onClick={() => scrollToSection('features')}
+                className="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-gray-200 hover:text-white transition-all btn-glow font-genos tracking-wide"
+              >
+                Features
+              </button>
+
+              <Link
+                to="/announcements"
+                className={`px-4 py-2 rounded-lg transition-all btn-glow font-genos tracking-wide ${
+                  isActive('/announcements')
+                    ? 'bg-white/15 text-white'
+                    : 'bg-white/5 hover:bg-white/10 text-gray-200 hover:text-white'
+                }`}
+                aria-current={isActive('/announcements') ? 'page' : undefined}
+              >
+                Announcements
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Logo */}
+          <img src="/cc-logo.png" alt="Club Logo" className="h-16 w-auto object-contain" loading="lazy" />
         </div>
 
-        <div className="hidden md:flex items-center gap-4">
-  <Link
-    to="/"
-    className="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-gray-200 hover:text-white transition-all btn-glow font-genos tracking-wide"
-  >
-    Home
-  </Link>
+        {/* Mobile Layout */}
+        <div className="md:hidden">
+          <div className="grid grid-cols-[auto_1fr_auto] items-center gap-3">
+            {/* Left: RVCE Logo */}
+            <Link to="/" className="flex items-center" onClick={closeMenu}>
+              <img src="/rvce-logo.png" alt="RVCE Logo" className="h-10 w-auto object-contain" loading="lazy" />
+            </Link>
 
-  <Link
-    to="/announcements"
-    className="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-gray-200 hover:text-white transition-all btn-glow font-genos tracking-wide"
-  >
-    Announcements
-  </Link>
+            {/* Center: Games Button */}
+            <div className="flex justify-center">
+              <Link
+                to="/games"
+                className={`px-5 py-2 rounded-lg font-bold text-sm transition-all btn-glow font-genos tracking-wide ${'bg-white/15 text-white'
+                }`}
+                onClick={closeMenu}
+                aria-label="Navigate to Games"
+                aria-current={isActive('/games') ? 'page' : undefined}
+              >
+                Games
+              </Link>
+            </div>
 
-  <button
-    onClick={() => scrollToSection('about')}
-    className="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-gray-200 hover:text-white transition-all btn-glow font-genos tracking-wide"
-  >
-    About
-  </button>
-
-  <button
-    onClick={() => scrollToSection('features')}
-    className="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-gray-200 hover:text-white transition-all btn-glow font-genos tracking-wide"
-  >
-    Features
-  </button>
-</div>
-
-
-        <div className="flex items-center gap-3">
-          <img src="/cc-logo.png" alt="Club Logo" className="h-12 md:h-16 w-auto object-contain" loading="lazy" />
-
-          <button
-            onClick={toggleMenu}
-            className="md:hidden p-2 text-white hover:bg-white/10 rounded-lg transition"
-            aria-expanded={mobileMenuOpen}
-            aria-label="Toggle navigation menu"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {mobileMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
+            {/* Right: Club Logo + Hamburger */}
+            <div className="flex items-center gap-2 justify-end">
+              <img src="/cc-logo.png" alt="Club Logo" className="h-12 w-auto object-contain" loading="lazy" />
+              
+              <button
+                onClick={toggleMenu}
+                className="p-2 text-white hover:bg-white/10 rounded-lg transition"
+                aria-expanded={mobileMenuOpen}
+                aria-label="Toggle navigation menu"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  {mobileMenuOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
+      {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-white/6 bg-black/80 backdrop-blur-md">
           <div className="px-4 py-4 space-y-3">
             <Link
               to="/"
-              className="block px-4 py-2 text-lg text-gray-200 hover:text-white hover:bg-white/5 rounded-lg transition"
-              onClick={closeMenu}
+              className={`block px-4 py-2 text-lg rounded-lg transition ${
+                isActive('/')
+                  ? 'bg-white/15 text-white'
+                  : 'text-gray-200 hover:text-white hover:bg-white/5'
+              }`}
+              onClick={() => {
+                closeMenu();
+                if (location.pathname === '/') {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+              }}
+              aria-current={isActive('/') ? 'page' : undefined}
             >
-              Home
-            </Link>
-            <Link
-              to="/announcements"
-              className="block px-4 py-2 text-lg text-gray-200 hover:text-white hover:bg-white/5 rounded-lg transition"
-              onClick={closeMenu}
-            >
-              Announcements
+              HomePage
             </Link>
             <button
               onClick={() => scrollToSection('about')}
               className="block w-full text-left px-4 py-2 text-lg text-gray-200 hover:text-white hover:bg-white/5 rounded-lg transition"
             >
-              About
+              Overview
             </button>
             <button
               onClick={() => scrollToSection('features')}
@@ -123,6 +198,18 @@ export default function Navbar() {
             >
               Features
             </button>
+            <Link
+              to="/announcements"
+              className={`block px-4 py-2 text-lg rounded-lg transition ${
+                isActive('/announcements')
+                  ? 'bg-white/15 text-white'
+                  : 'text-gray-200 hover:text-white hover:bg-white/5'
+              }`}
+              onClick={closeMenu}
+              aria-current={isActive('/announcements') ? 'page' : undefined}
+            >
+              Announcements
+            </Link>
           </div>
         </div>
       )}
