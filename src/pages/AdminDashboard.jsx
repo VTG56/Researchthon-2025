@@ -1,5 +1,6 @@
 // src/pages/AdminDashboard.jsx
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   query,
   orderBy,
@@ -14,9 +15,10 @@ import { announcementCollection } from "../firebase/refs";
 import AdminAnnouncementForm from "../components/AdminAnnouncementForm";
 import AnnouncementCard from "../components/AnnouncementCard";
 import { db, storage } from "../firebase/client";
-import { FiTrash2, FiEdit3 } from "react-icons/fi";
+import { FiTrash2, FiEdit3, FiLayout } from "react-icons/fi";
 
 const AdminDashboard = () => {
+  const navigate = useNavigate();
   const [announcements, setAnnouncements] = useState([]);
   const [deletingId, setDeletingId] = useState(null);
 
@@ -26,6 +28,14 @@ const AdminDashboard = () => {
   const [editBody, setEditBody] = useState("");
   const [editPinned, setEditPinned] = useState(false);
   const [savingEdit, setSavingEdit] = useState(false);
+
+  // Check admin authentication
+  useEffect(() => {
+    const isAdmin = localStorage.getItem("isAdmin");
+    if (isAdmin !== "true") {
+      navigate("/admin/login");
+    }
+  }, [navigate]);
 
   useEffect(() => {
     const q = query(announcementCollection(), orderBy("timestamp", "desc"));
@@ -96,7 +106,7 @@ const AdminDashboard = () => {
       alert("Announcement deleted.");
     } catch (err) {
       console.error("Failed to delete announcement:", err);
-      alert("Delete failed — check console for details.");
+      alert("Delete failed – check console for details.");
     } finally {
       setDeletingId(null);
     }
@@ -134,7 +144,7 @@ const AdminDashboard = () => {
       closeEdit();
     } catch (err) {
       console.error("Failed to update announcement:", err);
-      alert("Update failed — check console.");
+      alert("Update failed – check console.");
       setSavingEdit(false);
     }
   };
@@ -144,52 +154,94 @@ const AdminDashboard = () => {
       <div className="max-w-6xl mx-auto px-4">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 text-white">Admin Dashboard</h1>
 
-        <div className="mb-8 md:mb-12">
-          <AdminAnnouncementForm />
+        {/* Dashboard Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-8 md:mb-12">
+          {/* Manage Announcements Card */}
+          <button
+            onClick={() => document.getElementById('announcements-section')?.scrollIntoView({ behavior: 'smooth' })}
+            className="bg-gray-900/60 border border-white/10 rounded-xl p-6 hover:scale-[1.02] hover:bg-gray-900/80 transition-all duration-200 text-left group"
+          >
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
+                <FiEdit3 className="w-5 h-5 text-blue-400" />
+              </div>
+              <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">
+                Manage Announcements
+              </h3>
+            </div>
+            <p className="text-gray-400 text-sm">
+              Create, edit, and delete announcements for the community
+            </p>
+          </button>
+
+          {/* Game Controls Card */}
+          <button
+            onClick={() => navigate('/admin/games')}
+            className="bg-gray-900/60 border border-white/10 rounded-xl p-6 hover:scale-[1.02] hover:bg-gray-900/80 transition-all duration-200 text-left group"
+          >
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center">
+                <FiLayout className="w-5 h-5 text-green-400" />
+              </div>
+              <h3 className="text-xl font-bold text-white group-hover:text-green-400 transition-colors">
+                Game Controls
+              </h3>
+            </div>
+            <p className="text-gray-400 text-sm">
+              Manage scavenger hunt and bingo game settings
+            </p>
+          </button>
         </div>
 
-        <div>
-          <div className="flex items-center justify-between mb-4 md:mb-6">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">All Announcements</h2>
-            <span className="text-xs md:text-sm text-gray-400 bg-green-500/10 px-2 md:px-3 py-1 rounded-full border border-green-500/20">
-              ● Live
-            </span>
+        {/* Announcements Section */}
+        <div id="announcements-section">
+          <div className="mb-8 md:mb-12">
+            <AdminAnnouncementForm />
           </div>
 
-          <div className="space-y-4 md:space-y-6">
-            {announcements.map((announcement) => (
-              <div key={announcement.id} className="flex flex-col md:flex-row gap-3 md:gap-4 items-start">
-                <div className="flex-1 w-full">
-                  <AnnouncementCard announcement={announcement} />
-                </div>
+          <div>
+            <div className="flex items-center justify-between mb-4 md:mb-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">All Announcements</h2>
+              <span className="text-xs md:text-sm text-gray-400 bg-green-500/10 px-2 md:px-3 py-1 rounded-full border border-green-500/20">
+                ● Live
+              </span>
+            </div>
 
-                <div className="w-full md:w-auto flex md:flex-col gap-2 md:gap-3 md:pt-2">
-                  <button
-                    onClick={() => openEdit(announcement)}
-                    className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 md:px-5 py-2 md:py-2.5 rounded-lg text-sm md:text-base bg-blue-600 hover:bg-blue-700 text-white transition font-medium"
-                  >
-                    <FiEdit3 className="w-4 h-4" />
-                    <span>Edit</span>
-                  </button>
+            <div className="space-y-4 md:space-y-6">
+              {announcements.map((announcement) => (
+                <div key={announcement.id} className="flex flex-col md:flex-row gap-3 md:gap-4 items-start">
+                  <div className="flex-1 w-full">
+                    <AnnouncementCard announcement={announcement} />
+                  </div>
 
-                  <button
-                    onClick={() => handleDelete(announcement)}
-                    disabled={deletingId === announcement.id}
-                    className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-4 md:px-5 py-2 md:py-2.5 rounded-lg text-sm md:text-base transition font-medium ${
-                      deletingId === announcement.id
-                        ? "bg-red-800 text-white/60 cursor-not-allowed"
-                        : "bg-red-600 hover:bg-red-700 text-white"
-                    }`}
-                  >
-                    <FiTrash2 className="w-4 h-4" />
-                    <span>{deletingId === announcement.id ? "Deleting..." : "Delete"}</span>
-                  </button>
+                  <div className="w-full md:w-auto flex md:flex-col gap-2 md:gap-3 md:pt-2">
+                    <button
+                      onClick={() => openEdit(announcement)}
+                      className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 md:px-5 py-2 md:py-2.5 rounded-lg text-sm md:text-base bg-blue-600 hover:bg-blue-700 text-white transition font-medium"
+                    >
+                      <FiEdit3 className="w-4 h-4" />
+                      <span>Edit</span>
+                    </button>
+
+                    <button
+                      onClick={() => handleDelete(announcement)}
+                      disabled={deletingId === announcement.id}
+                      className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-4 md:px-5 py-2 md:py-2.5 rounded-lg text-sm md:text-base transition font-medium ${
+                        deletingId === announcement.id
+                          ? "bg-red-800 text-white/60 cursor-not-allowed"
+                          : "bg-red-600 hover:bg-red-700 text-white"
+                      }`}
+                    >
+                      <FiTrash2 className="w-4 h-4" />
+                      <span>{deletingId === announcement.id ? "Deleting..." : "Delete"}</span>
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
-            {announcements.length === 0 && (
-              <div className="text-center text-gray-400 py-12">No announcements yet.</div>
-            )}
+              ))}
+              {announcements.length === 0 && (
+                <div className="text-center text-gray-400 py-12">No announcements yet.</div>
+              )}
+            </div>
           </div>
         </div>
       </div>

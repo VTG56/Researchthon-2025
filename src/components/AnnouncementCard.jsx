@@ -107,7 +107,7 @@ const AnnouncementCard = ({ announcement }) => {
           )}
         </div>
 
-        <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold text-white mb-2 md:mb-3">
+        <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white mb-2 md:mb-3">
           {announcement.title}
         </h3>
 
@@ -117,7 +117,7 @@ const AnnouncementCard = ({ announcement }) => {
 
         {announcement.attachments && announcement.attachments.length > 0 && (
           <div className="mt-4 space-y-2 md:space-y-3">
-            <p className="text-base md:text-lg text-gray-300 font-medium">Attachments</p>
+            <p className="text-base md:text-lg text-gray-300 font-semibold">Attachments</p>
 
             <div className="flex flex-col gap-2">
               {announcement.attachments.map((file, idx) => (

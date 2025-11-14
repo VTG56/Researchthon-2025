@@ -1,6 +1,10 @@
-// src/App.jsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import ScavengerGame from './pages/ScavengerGame';
+import BingoGame from './pages/BingoGame';
+import GamesPage from './pages/GamesPage';
+import AdminGamesPage from './pages/AdminGamesPage';
+import AdminScavengerControl from './pages/AdminScavengerControl';
+import AdminBingoControl from './pages/AdminBingoControl';
 import Navbar from "./layout/Navbar";
 import Footer from "./layout/Footer";
 
@@ -19,7 +23,6 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="min-h-screen flex flex-col bg-[#0b0f13] text-white">
-        {/* Space Background with Parallax - Layer 1 */}
         <SpaceBackground 
           particleCount={120}
           particleColors={['#ffffff', '#60a5fa', '#3b82f6']}
@@ -31,16 +34,21 @@ export default function App() {
           showConnections={true}
         />
         
-        {/* Navbar - Layer 50 */}
         <Navbar />
 
-        {/* Main Content - Layer 10 */}
         <main className="flex-grow relative z-10 pt-20">
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/announcements" element={<AnnouncementsPage />} />
+            
+            <Route path="/games" element={<GamesPage />} />
+            <Route path="/games/scavenger" element={<ScavengerGame />} />
+            <Route path="/games/bingo" element={<BingoGame />} />
 
             <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/games" element={<AdminGamesPage />} />
+            <Route path="/admin/games/scavenger" element={<AdminScavengerControl />} />
+            <Route path="/admin/games/bingo" element={<AdminBingoControl />} />
 
             <Route
               path="/admin/dashboard"
@@ -57,7 +65,6 @@ export default function App() {
 
         <Footer />
 
-        {/* Cursor Ribbon - Top Layer (Layer 50) */}
         <CursorRibbon 
           color="#60a5fa"
           ribbonWidth={10}
