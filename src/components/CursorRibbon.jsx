@@ -3,10 +3,10 @@ import { useEffect, useRef } from 'react';
 
 const CursorRibbon = ({
   color = '#3b82f6',
-  ribbonWidth = 25,
+  ribbonWidth = 5,
   fadeSpeed = 0.97,
   smoothness = 0.2,
-  glowIntensity = 20,
+  glowIntensity = 5,
   resetDelay = 3000
 }) => {
   const canvasRef = useRef(null);
