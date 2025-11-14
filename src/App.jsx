@@ -60,11 +60,11 @@ export default function App() {
         {/* Cursor Ribbon - Top Layer (Layer 50) */}
         <CursorRibbon 
           color="#60a5fa"
-          ribbonWidth={28}
-          fadeSpeed={0.97}
+          ribbonWidth={10}
+          fadeSpeed={0.8}
           smoothness={0.2}
           glowIntensity={25}
-          resetDelay={3000}
+          resetDelay={1500}
         />
       </div>
     </BrowserRouter>

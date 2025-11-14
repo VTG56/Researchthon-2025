@@ -77,7 +77,7 @@ export default function LandingPage() {
             variants={itemVariants}
             style={{ textShadow: '0 0 40px rgba(59, 130, 246, 0.3)' }}
           >
-            Researchthon 2025
+            ReSearchthon 2025
           </motion.h1>
           <motion.p 
             className="text-xl md:text-2xl lg:text-3xl text-gray-300 mb-10 md:mb-12 font-light"
@@ -129,13 +129,13 @@ export default function LandingPage() {
             className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-8 md:mb-10 text-center tracking-tight"
             variants={fadeInUp}
           >
-            About Researchthon
+            About ReSearchthon
           </motion.h2>
           <motion.p 
             className="text-lg md:text-xl lg:text-2xl text-gray-300 leading-relaxed text-center font-light"
             variants={fadeInUp}
           >
-            Researchthon 2025 is an innovative collegiate event bringing together students, 
+            ReSearchthon 2025 is an innovative collegiate event bringing together students, 
             researchers, and industry experts to collaborate on cutting-edge projects. 
             Over the course of this intensive program, participants will tackle real-world 
             challenges, develop groundbreaking solutions, and present their findings to a 
@@ -144,7 +144,7 @@ export default function LandingPage() {
           </motion.p>
         </div>
       </motion.section>
-
+      
       {/* Key Features Section - Full Screen */}
       <motion.section 
         id="features"
@@ -281,6 +281,19 @@ export default function LandingPage() {
             View All Announcements
           </motion.button>
         </motion.div>
+        <motion.section
+  initial={{ opacity: 0, scale: 0.95 }}
+  whileInView={{ opacity: 1, scale: 1 }}
+  transition={{ duration: 0.6, ease: "easeOut" }}
+  viewport={{ once: true }}
+  className="w-full px-4 py-20 flex justify-center"
+>
+  <img 
+    src="/banner.png"
+    className="rounded-2xl shadow-2xl w-full max-w-5xl"
+  />
+</motion.section>
+
       </motion.section>
     </div>
   );
