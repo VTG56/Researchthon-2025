@@ -208,7 +208,7 @@ export default function BingoGame() {
               </div>
               <h2 className="text-3xl font-genos font-bold mb-2">Bingo Starting Soon</h2>
               <p className="text-white/70 text-lg">
-                The bingo event will begin soon. Stay tuned!
+                The bingo event will be held on 16th. Stay tuned!
               </p>
             </div>
           </div>
