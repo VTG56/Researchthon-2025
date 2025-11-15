@@ -50,9 +50,9 @@ export default function Navbar() {
         {/* Desktop Layout */}
         <div className="hidden md:flex md:items-center md:justify-between">
           {/* Left Logo */}
-          <Link to="/" className="flex items-center" onClick={closeMenu}>
+          <a href="https://rvce.edu.in/" target="_blank" rel="noopener noreferrer" className="flex items-center">
             <img src="/rvce-logo.png" alt="RVCE Logo" className="h-12 w-auto object-contain" loading="lazy" />
-          </Link>
+          </a>
 
           {/* Center Section: Home + About + GAMES + Features + Announcements */}
           <div className="flex items-center gap-12">
@@ -117,16 +117,18 @@ export default function Navbar() {
           </div>
 
           {/* Right Logo */}
-          <img src="/cc-logo.png" alt="Club Logo" className="h-16 w-auto object-contain" loading="lazy" />
+          <a href="https://in.linkedin.com/company/coding-club-rvce" target="_blank" rel="noopener noreferrer">
+            <img src="/cc-logo.png" alt="Club Logo" className="h-16 w-auto object-contain" loading="lazy" />
+          </a>
         </div>
 
         {/* Mobile Layout */}
         <div className="md:hidden">
           <div className="grid grid-cols-[auto_1fr_auto] items-center gap-3">
             {/* Left: RVCE Logo */}
-            <Link to="/" className="flex items-center" onClick={closeMenu}>
+            <a href="https://rvce.edu.in/" target="_blank" rel="noopener noreferrer" className="flex items-center">
               <img src="/rvce-logo.png" alt="RVCE Logo" className="h-10 w-auto object-contain" loading="lazy" />
-            </Link>
+            </a>
 
             {/* Center: Games Button */}
             <div className="flex justify-center">
@@ -144,7 +146,9 @@ export default function Navbar() {
 
             {/* Right: Club Logo + Hamburger */}
             <div className="flex items-center gap-2 justify-end">
-              <img src="/cc-logo.png" alt="Club Logo" className="h-12 w-auto object-contain" loading="lazy" />
+              <a href="https://in.linkedin.com/company/coding-club-rvce" target="_blank" rel="noopener noreferrer">
+                <img src="/cc-logo.png" alt="Club Logo" className="h-12 w-auto object-contain" loading="lazy" />
+              </a>
               
               <button
                 onClick={toggleMenu}
