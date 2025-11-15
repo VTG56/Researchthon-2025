@@ -22,7 +22,7 @@ const FileUploadButton = ({ onFilesSelected }) => {
         ref={fileInputRef}
         type="file"
         multiple
-        accept=".pdf,.doc,.docx,.xlsx,.xls,.png,.jpg,.jpeg"
+        accept=".pdf,.doc,.docx,.ppt,.pptx,.xlsx,.xls,.png,.jpg,.jpeg"
         onChange={handleFileChange}
         className="hidden"
       />
