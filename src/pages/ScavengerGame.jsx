@@ -137,7 +137,7 @@ export default function ScavengerGame() {
           <div className="flex items-center justify-center min-h-[60vh]">
             <div className="bg-gray-900/70 border border-white/10 rounded-xl p-8 md:p-12 max-w-2xl w-full">
               <div className="text-center mb-8">
-                <h1 className="text-4xl md:text-5xl font-genos font-bold mb-2">Scavenger Hunt</h1>
+                <h1 className="text-5xl md:text-5xl font-genos font-bold mb-2">CHAOS COLLECTORS</h1>
                 <span className="inline-block px-4 py-1 bg-blue-600/20 text-blue-400 text-sm rounded-full border border-blue-500/30">
                   Scheduled
                 </span>
@@ -189,7 +189,7 @@ export default function ScavengerGame() {
 
               <div className="mt-6 text-center">
                 <p className="text-white/40 text-sm">
-                  Note: Admin must activate the hunt manually when ready
+                  Cmon guys, you guys deserve enjoyment as well
                 </p>
               </div>
             </div>

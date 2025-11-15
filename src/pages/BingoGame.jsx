@@ -224,7 +224,7 @@ export default function BingoGame() {
           <div className="flex items-center justify-center min-h-[60vh]">
             <div className="bg-gray-900/80 border border-white/10 rounded-xl p-8 md:p-12 max-w-2xl w-full">
               <div className="text-center mb-8">
-                <h1 className="text-4xl md:text-5xl font-genos font-bold mb-2">BINGO</h1>
+                <h1 className="text-5xl md:text-5xl font-genos font-bold mb-2">VIRTUAL BINGO</h1>
                 <span className="inline-block px-4 py-1 bg-blue-600/20 text-blue-400 text-sm rounded-full border border-blue-500/30">
                   Scheduled
                 </span>
@@ -267,7 +267,7 @@ export default function BingoGame() {
 
               <div className="border-t border-white/10 pt-6 mt-6 text-center">
                 <p className="text-white/70 text-sm">
-                  Numbers will begin updating live at start time.
+                  patience, patience
                 </p>
               </div>
             </div>
@@ -288,7 +288,7 @@ export default function BingoGame() {
         <div className="max-w-4xl mx-auto px-4 py-10">
           <div className="text-center mb-8">
             <div className="flex items-center justify-center gap-3 mb-3">
-              <h1 className="text-4xl md:text-6xl font-genos font-bold">BINGO</h1>
+              <h1 className="text-4xl md:text-6xl font-genos font-bold">VIRTUAL BINGO</h1>
               <span className="px-3 py-1 bg-red-600 text-white text-xs rounded-full animate-pulse">
                 LIVE
               </span>
